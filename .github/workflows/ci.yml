@@ -6,7 +6,8 @@ on:
 
 jobs:
   build:
-    if: contains(github.event.head_commit.message, secrets.REDEPLOY_KEY)
+    # ❗ Проверка по обычной строке, без secrets
+    if: contains(github.event.head_commit.message, 'deploy-my-key')
     runs-on: ubuntu-latest
 
     steps:
