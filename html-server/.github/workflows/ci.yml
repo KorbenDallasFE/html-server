@@ -6,10 +6,20 @@ on:
 
 jobs:
   build:
-    if: contains(github.event.head_commit.message, 'deploy-my-key')
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check commit message
+        id: check_commit
+        run: |
+          echo "commit_message=${{ github.event.head_commit.message }}" >> $GITHUB_OUTPUT
+
+      - name: Exit if commit message doesn't contain redeploy key
+        if: ${{ !contains(steps.check_commit.outputs.commit_message, 'THN-znUa@<Gb2F8,j}m]') }}
+        run: |
+          echo "Commit message doesn't contain redeploy key. Skipping deployment."
+          exit 1
+
       - name: Checkout code
         uses: actions/checkout@v3
 
