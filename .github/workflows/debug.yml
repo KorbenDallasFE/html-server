@@ -1,0 +1,13 @@
+name: Test Debug CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo something
+        run: echo "✅ CI is working!"
