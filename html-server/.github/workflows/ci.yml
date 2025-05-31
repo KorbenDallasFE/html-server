@@ -12,14 +12,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Check deploy key
-        run: |
-          echo "Commit message: ${{ github.event.head_commit.message }}"
-          if [[ "${{ github.event.head_commit.message }}" != *"${{ secrets.REDEPLOY_KEY }}"* ]]; then
-            echo "Commit message does not contain redeploy key. Skipping workflow."
-            exit 1
-          fi
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
